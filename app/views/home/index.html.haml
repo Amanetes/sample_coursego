@@ -26,3 +26,10 @@
       %form.d-flex{:role => "search"}
         %input.form-control.me-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
         %button.btn.btn-outline-success{:type => "submit"} Search
+
+= link_to root_path do
+  .fa.fa-home
+
+= link_to courses_path, class: 'btn btn-success' do
+  .fa.fa-book
+    Courses
