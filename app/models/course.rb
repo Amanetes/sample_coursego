@@ -2,6 +2,8 @@
 
 class Course < ApplicationRecord
   extend FriendlyId
+  include PublicActivity::Model
+  tracked owner: proc { |controller, _model| controller.current_user } # set activity owner to current_user by default
 
   validates :title, :short_description, :language, :level, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
@@ -23,7 +25,7 @@ class Course < ApplicationRecord
   def self.levels
     LEVELS.map { |level| [level, level] }
   end
-
+  # Метод генерации зашифрованного пути к конкретному ресурсу вместо id
   # def generated_slug
   # require 'securerandom'
   # @random_slug ||= persisted? ? friendly_id : SecureRandom.hex(4)

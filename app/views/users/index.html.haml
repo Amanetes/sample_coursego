@@ -1,8 +1,14 @@
-.container
-  .row.row-cols-1.row-cols-sm-2.row-cols-md-3.g-3
-    .col
-      - @users.each do |user|
-        = render 'users/user', user: user
+%h3
+  .text-center
+    Users
+    .badge.bg-info
+      = @users.count
+%p
+
+
+.card-columns
+  - @users.each do |user|
+    = render 'users/user', user: user
 
 .form-input
   = search_form_for @q do |f|

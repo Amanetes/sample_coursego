@@ -1,0 +1,14 @@
+- content_for :title do
+  Corsego
+  \/
+  Edit roles for
+  = @user.username
+
+.card.shadow
+  .card-header
+    Editing roles for
+    = @user.email
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Cancel', users_path, class: 'btn btn-danger'
