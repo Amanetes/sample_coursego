@@ -24,6 +24,7 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'spring'
   gem 'rubocop-rails', require: false
+  gem 'rubocop-performance', require: false
 end
 
 group :test do
@@ -39,3 +40,4 @@ gem 'simple_form'
 gem 'faker'
 gem 'devise'
 gem 'friendly_id', '~> 5.4.0'
+gem 'ransack'
