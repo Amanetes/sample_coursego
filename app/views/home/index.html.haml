@@ -1,35 +1,66 @@
-%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-  .container-fluid
-    %a.navbar-brand{:href => "#"} Navbar
-    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
-      %span.navbar-toggler-icon
-    #navbarSupportedContent.collapse.navbar-collapse
-      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
-        %li.nav-item
-          %a.nav-link.active{"aria-current" => "page", :href => "#"} Home
-        %li.nav-item
-          %a.nav-link{:href => "#"} Link
-        %li.nav-item.dropdown
-          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
-            Dropdown
-          %ul.dropdown-menu
-            %li
-              %a.dropdown-item{:href => "#"} Action
-            %li
-              %a.dropdown-item{:href => "#"} Another action
-            %li
-              %hr.dropdown-divider/
-            %li
-              %a.dropdown-item{:href => "#"} Something else here
-        %li.nav-item
-          %a.nav-link.disabled Disabled
-      %form.d-flex{:role => "search"}
-        %input.form-control.me-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
-        %button.btn.btn-outline-success{:type => "submit"} Search
+.jumbotron
+  .display-4
+    What do you want to learn today?
 
-= link_to root_path do
-  .fa.fa-home
+  .p-4
 
-= link_to courses_path, class: 'btn btn-success' do
-  .fa.fa-book
-    Courses
+  .form-inline.my-2.my-lg-0
+    = form_tag(courses_path, method: :get) do
+      .input-group
+        = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
+        %span.input-group-append
+          %button.btn.btn-primary.btn-sm{:type => "submit"}
+            %span.fa.fa-search{"aria-hidden" => "true"}
+
+.card-group
+  .card.card-body
+    %h1
+      .fa.fa-graduation-cap
+    = Course.count
+    online courses
+    .row
+    Explore a variety of fresh topics
+  .card.card-body
+    %h1
+      .fa.fa-chalkboard-teacher
+      /.fa.fa-brain
+    = Course.distinct.count(:user_id)
+    expert instructors
+    .row
+    Find the right instructor for you
+  .card.card-body
+    %h1
+      .fa.fa-user-graduate
+    = User.count
+    active learners
+    .row
+    Join the knowledge sharing community
+  .card.card-body
+    %h1
+      .fa.fa-infinity
+    Lifetime access
+    .row
+    Learn on your schedule
+
+%hr
+%h2
+  Popular courses
+.card-columns
+  - @courses.each do |course|
+    = render 'courses/course', course: course
+
+%hr
+%h2
+  Top rated courses
+.card-columns
+  - @courses.each do |course|
+    = render 'courses/course', course: course
+
+%hr
+%h2
+  Latest courses
+.card-columns
+  - @latest_courses.each do |course|
+    = render 'courses/course', course: course
+
+%hr

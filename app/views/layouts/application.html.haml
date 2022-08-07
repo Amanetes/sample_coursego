@@ -2,8 +2,9 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title SampleCoursego
-    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title
+      = content_for?(:title) ? yield(:title) : "Corsego Sample"
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -12,4 +13,6 @@
   %body
     = render 'layouts/shared/header'
     = render 'layouts/shared/flash'
-    = yield
+    .container
+      %p
+      = yield

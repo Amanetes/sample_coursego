@@ -1,12 +1,10 @@
-%p#notice= notice
-
-%p
-  %b Title:
+- content_for :title do
   = @course.title
-%p
-  %b Description:
-  = @course.description
 
-= link_to 'Edit', edit_course_path(@course)
-\|
-= link_to 'Back', courses_path
+.ol.breadcrumb
+  .li.breadcrumb-item
+    = link_to 'Courses', courses_path
+  .li.breadcrumb-item.active
+    = @course.title
+%p
+= render 'courses/course', course: @course
