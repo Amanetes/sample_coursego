@@ -17,6 +17,10 @@
           = link_to new_course_path, class: class_names('nav-link', { active: current_page?(new_course_path) }) do
             .fa.fa-plus
             New Course
+        %li.nav-item
+          = link_to users_path, class: class_names('nav-link', { active: current_page?(users_path) }) do
+            .fa.fa-users
+            Users
       .form-inline.my-2.my-lg-0
         = form_tag(courses_path, method: :get) do
           .input-group
@@ -40,6 +44,11 @@
               .fa.fa-sign-out-alt
               %b Sign out
     - else
-      %ul.navbar-nav
-        %li.nav-item= link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
-        %li.nav-item= link_to 'Log In', new_user_session_path, class: 'nav-link'
+      %ul.navbar-nav.mr-auto
+      %ul.navbar-nav.mr-right
+        %li.nav-item
+          = link_to 'Sign Up', new_user_registration_path,
+          class: class_names('nav-link', { active: current_page?(new_user_registration_path) })
+        %li.nav-item
+          = link_to 'Log In', new_user_session_path,
+          class: class_names('nav-link', { active: current_page?(new_user_session_path) })
