@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Course < ApplicationRecord
   extend FriendlyId
 
@@ -11,7 +13,7 @@ class Course < ApplicationRecord
 
   friendly_id :title, use: :slugged
 
-# def generated_slug
-# require 'securerandom'
-# @random_slug ||= persisted? ? friendly_id : SecureRandom.hex(4)
+  # def generated_slug
+  # require 'securerandom'
+  # @random_slug ||= persisted? ? friendly_id : SecureRandom.hex(4)
 end

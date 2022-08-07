@@ -1,0 +1,51 @@
+---
+
+require:
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  DisplayCopNames: true
+  TargetRubyVersion: 3
+  Exclude:
+    - 'bin/**'
+    - 'db/schema.rb'
+    - 'db/migrate/**'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'app/channels/**/*'
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+  # .html_safe
+
+Style/EmptyMethod:
+  Enabled: false
+  # def index; end
+
+Metrics/AbcSize:
+  Enabled: false
+  # def index 100 lines end
+
+Bundler/OrderedGems:
+  Enabled: false
+  # gem order A-Z
+
+Layout/LineLength:
+  Enabled: false
+
+Rails/Output:
+  Enabled: false
+  # puts 'abc'

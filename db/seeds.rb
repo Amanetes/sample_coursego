@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 User.create!(
   email: 'admin@example.com',
   password: 'foobar',
@@ -6,8 +8,8 @@ User.create!(
 
 30.times do
   Course.create!([{
-                    title: Faker::Educator.course_name,
-                    description: Faker::TvShows::GameOfThrones.quote,
-                    user: User.find_by(email: "admin@example.com")
-                  }])
+                   title: Faker::Educator.course_name,
+                   description: Faker::TvShows::GameOfThrones.quote,
+                   user: User.find_by(email: 'admin@example.com')
+                 }])
 end
