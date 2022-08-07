@@ -19,15 +19,17 @@ class CoursesController < ApplicationController
   end
 
   def new
-    @course = Course.new
+    @course = current_user.courses.build
+    authorize_course!
   end
 
   def edit
+    authorize_course!
   end
 
   def create
     @course = current_user.courses.build(course_params)
-
+    authorize_course!
     respond_to do |format|
       if @course.save
         format.html { redirect_to course_url(@course), notice: 'Course was successfully created.' }
@@ -52,6 +54,7 @@ class CoursesController < ApplicationController
   end
 
   def destroy
+    authorize_course!
     @course.destroy
 
     respond_to do |format|
@@ -64,6 +67,10 @@ class CoursesController < ApplicationController
 
   def set_course
     @course = Course.friendly.find(params[:id])
+  end
+
+  def authorize_course!
+    authorize(@course || Course)
   end
 
   def course_params
