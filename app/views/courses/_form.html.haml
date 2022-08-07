@@ -1,4 +1,3 @@
--# frozen_string_literal: true
 = simple_form_for(@course) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
@@ -6,6 +5,11 @@
   .form-inputs
     = f.input :title
     = f.input :description, as: :rich_text_area
+    -#%small= f.error :description, class: 'text-danger'
+    = f.input :short_description
+    = f.input :language, collection: %w[English Polish Russian]
+    = f.input :level, collection: %w[Beginner Intermediate Advanced]
+    = f.input :price
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: 'mt-3'
