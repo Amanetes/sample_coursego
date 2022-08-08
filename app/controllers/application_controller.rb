@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :set_global_variables, if: :user_signed_in?
   protect_from_forgery prepend: true
   # protect_from_forgery with: :exception # gives an error if placed after authenticate user!
+  after_action :user_activity # to check if user is online
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   include PublicActivity::StoreController # save current_user using gem public_activity
@@ -14,6 +15,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  # Пользователь юзает экшен - вызывается коллбек, который обновляет поле :updated_at у пользователя в БД
+  def user_activity
+    current_user.try :touch
+  end
 
   # pundit
   def user_not_authorized

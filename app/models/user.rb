@@ -16,6 +16,10 @@ class User < ApplicationRecord
     email.split(/@/).first
   end
 
+  def online?
+    updated_at > 2.minutes.ago
+  end
+
   extend FriendlyId
   friendly_id :email, use: :slugged
 
