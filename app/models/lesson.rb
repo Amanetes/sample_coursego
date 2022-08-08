@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Lesson < ApplicationRecord
-  belongs_to :course
+  belongs_to :course, inverse_of: :lessons
 
   validates :title, :content, presence: true # :course_id не нужно указывать явно
 

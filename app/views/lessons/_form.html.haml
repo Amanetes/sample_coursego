@@ -1,4 +1,4 @@
-= simple_form_for(@lesson) do |f|
+= simple_form_for([@course, @lesson]) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
@@ -6,7 +6,8 @@
     = f.input :title
     = f.input :content, as: :rich_text_area
     -# Для того чтобы урок создавался для конкретного курса. Значение либо получаем из параметров или id курса
-    = f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
+    -# Ассоциация вызывает ошибку
+    -# = f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
 
   .form-actions
     = f.button :submit, class: 'mt-3'
