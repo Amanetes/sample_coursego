@@ -35,7 +35,8 @@
       .fa.fa-sync
 
   .col-md-10
-    .card-columns
+    .row
       - @courses.each do |course|
-        = render 'courses/course', course: course
+        .card-lg-6.col-md-4.col-12.mt-3
+          = render 'courses/course', course: course
 %br

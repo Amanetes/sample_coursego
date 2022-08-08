@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # Migration responsible for creating a table with activity
+# Баг c PG и PublicActivity - название таблицы переименовать во множественное число
 class CreateActivities < ActiveRecord::Migration[5.0]
   def self.up
     create_table :activity do |t|

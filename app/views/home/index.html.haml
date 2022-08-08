@@ -46,22 +46,25 @@
 %hr
 %h2
   Popular courses
-.card-columns
+.row
   - @courses.each do |course|
-    = render 'courses/course', course: course
+    .card-lg-6.col-md-4.col-12.mt-3
+      = render 'courses/course', course: course
 
 %hr
 %h2
   Top rated courses
-.card-columns
+.row
   - @courses.each do |course|
-    = render 'courses/course', course: course
+    .card-lg-6.col-md-4.col-12.mt-3
+      = render 'courses/course', course: course
 
 %hr
 %h2
   Latest courses
-.card-columns
+.row
   - @latest_courses.each do |course|
-    = render 'courses/course', course: course
+    .card-lg-6.col-md-4.col-12.mt-3
+      = render 'courses/course', course: course
 
 %hr

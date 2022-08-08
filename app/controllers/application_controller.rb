@@ -3,7 +3,8 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_global_variables, if: :user_signed_in?
-  protect_from_forgery
+  protect_from_forgery prepend: true
+  # protect_from_forgery with: :exception # gives an error if placed after authenticate user!
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   include PublicActivity::StoreController # save current_user using gem public_activity

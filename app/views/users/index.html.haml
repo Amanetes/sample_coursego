@@ -6,11 +6,12 @@
 %p
 
 
-.card-columns
+.row
   - @users.each do |user|
-    = render 'users/user', user: user
+    .card-lg-6.col-md-4.col-12.mt-3
+      = render 'users/user', user: user
 
-.form-input
+.form-input.my-3
   = search_form_for @q do |f|
     = f.search_field :email_cont, placeholder: 'email'
     = f.search_field :sign_in_count_eq, placeholder: 'sign in count'

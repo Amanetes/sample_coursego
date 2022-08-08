@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :confirmable
   has_many :courses, dependent: :destroy
+  validate :must_have_a_role, on: :update
 
   rolify
 
@@ -14,6 +15,9 @@ class User < ApplicationRecord
   def username
     email.split(/@/).first
   end
+
+  extend FriendlyId
+  friendly_id :email, use: :slugged
 
   # Баг с коллбеком, задваивание ролей.
   # Решается переносом коллбека после rolify или заменой колбека на after_commit
@@ -33,5 +37,9 @@ class User < ApplicationRecord
       add_role(:student) if roles.blank?
       add_role(:teacher) # if you want any user to be able to create own courses
     end
+  end
+
+  def must_have_a_role
+    errors.add(:roles, 'must have at least one role') unless roles.any?
   end
 end
