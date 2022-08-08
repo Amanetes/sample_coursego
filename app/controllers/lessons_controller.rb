@@ -8,6 +8,7 @@ class LessonsController < ApplicationController
   end
 
   def show
+    authorize_lesson!
   end
 
   def new
@@ -15,6 +16,7 @@ class LessonsController < ApplicationController
   end
 
   def edit
+    authorize_lesson!
   end
 
   def create
@@ -32,6 +34,7 @@ class LessonsController < ApplicationController
   end
 
   def update
+    authorize_lesson!
     respond_to do |format|
       if @lesson.update(lesson_params)
         format.html { redirect_to lesson_url(@lesson), notice: 'Lesson was successfully updated.' }
@@ -44,6 +47,7 @@ class LessonsController < ApplicationController
   end
 
   def destroy
+    authorize_lesson!
     @lesson.destroy
 
     respond_to do |format|
@@ -56,6 +60,10 @@ class LessonsController < ApplicationController
 
   def set_lesson
     @lesson = Lesson.friendly.find(params[:id])
+  end
+
+  def authorize_lesson!
+    authorize(@lesson || Lesson)
   end
 
   def lesson_params

@@ -4,7 +4,7 @@
 
   .form-inputs
     = f.input :title
-    = f.input :content
+    = f.input :content, as: :rich_text_area
     -# Для того чтобы урок создавался для конкретного курса. Значение либо получаем из параметров или id курса
     = f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
 
