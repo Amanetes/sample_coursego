@@ -2,6 +2,7 @@
 
 class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[show edit update destroy]
+  before_action :set_course, except: %i[index]
   def index
     @lessons = Lesson.all
   end
@@ -12,7 +13,6 @@ class LessonsController < ApplicationController
 
   def new
     @lesson = Lesson.new
-    @course = Course.friendly.find(params[:course_id])
   end
 
   def edit
@@ -20,12 +20,11 @@ class LessonsController < ApplicationController
   end
 
   def create
-    @course = Course.friendly.find(params[:course_id])
     @lesson = @course.lessons.build(lesson_params)
 
     # @course = Course.friendly.find(params[:course_id])
     # @lesson.course_id = @course.id
-
+    authorize_lesson!
     respond_to do |format|
       if @lesson.save
         format.html { redirect_to course_lesson_url(@course, @lesson), notice: 'Lesson was successfully created.' }
@@ -64,6 +63,9 @@ class LessonsController < ApplicationController
 
   def set_lesson
     @lesson = Lesson.friendly.find(params[:id])
+  end
+
+  def set_course
     @course = Course.friendly.find(params[:course_id])
   end
 
@@ -71,7 +73,9 @@ class LessonsController < ApplicationController
     authorize(@lesson || Lesson)
   end
 
+  # Убрать course_id из permitted params по соображениям безопасности.
+  # Id все равно присваивается в экшене create через ассоциации
   def lesson_params
-    params.require(:lesson).permit(:title, :content, :course_id)
+    params.require(:lesson).permit(:title, :content)
   end
 end
