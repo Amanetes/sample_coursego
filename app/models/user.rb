@@ -21,6 +21,10 @@ class User < ApplicationRecord
     updated_at > 2.minutes.ago
   end
 
+  def buy_course(course)
+    enrollments.create(course: course, price: course.price)
+  end
+
   extend FriendlyId
   friendly_id :email, use: :slugged
 

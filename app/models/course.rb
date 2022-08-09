@@ -18,6 +18,10 @@ class Course < ApplicationRecord
 
   friendly_id :title, use: :slugged
 
+  def bought?(user)
+    enrollments.where(user_id: [user.id], course_id: [id]).empty?
+  end
+
   LANGUAGES = %i[English Russian Polish Spanish].freeze
   def self.languages
     LANGUAGES.map { |language| [language, language] }
