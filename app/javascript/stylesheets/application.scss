@@ -1,4 +1,12 @@
 @import "~bootstrap/scss/bootstrap";
 
-//.form-control.is-invalid{ background-image: none; }
-//.form-control.is-valid{ background-image: none; }
+.parallax {
+  /* Set a specific height */
+  height: auto;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}

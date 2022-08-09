@@ -3,7 +3,8 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :confirmable
-  has_many :courses, dependent: :destroy
+  has_many :courses, dependent: :destroy, inverse_of: :user
+  has_many :enrollments, dependent: :destroy, inverse_of: :user
   validate :must_have_a_role, on: :update
 
   rolify

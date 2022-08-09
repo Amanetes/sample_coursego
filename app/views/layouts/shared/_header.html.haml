@@ -24,6 +24,10 @@
           = link_to users_path, class: class_names('nav-link', { active: current_page?(users_path) }) do
             .fa.fa-users
             Users
+        %li.nav-item
+          = link_to enrollments_path, class: class_names('nav-link', { active: current_page?(enrollments_path) }) do
+            .fa.fa-lock-open
+            Enrollments
       = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
         .input-group
           = f.search_field :title_cont, class: 'form-control-sm', style: 'float: left; width: 150px; ', placeholder: 'Find a course', :autocomplete => :off
