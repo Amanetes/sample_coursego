@@ -11,6 +11,9 @@
   .col-lg-6
     = render 'courses/course', course: @course
   .col-lg-6
-    = link_to 'Add lesson', new_course_lesson_path(@course, @lesson)
+    = link_to new_course_lesson_path(@course, @lesson), class: 'd-grid gap-2' do
+      .btn.btn-primary
+        Add lesson
+    %p
     - @lessons.each do |lesson|
       = render 'lessons/lesson', lesson: lesson
