@@ -39,4 +39,5 @@
       - @courses.each do |course|
         .card-lg-6.col-md-4.col-12.mt-3
           = render 'courses/course', course: course
+    != pagy_bootstrap_nav(@pagy)
 %br

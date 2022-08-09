@@ -1,9 +1,13 @@
 .card
   .card-header
-    %h1 Editing course
+    %h3
+      .fa.fa-graduation-cap
+      Editing course
   .card-body
     = render 'form'
   .card-footer
     = link_to 'Show', @course
     \|
     = link_to 'Back', courses_path
+
+-# TODO ADD BREADCRUMBS TO EDIT AND NEW

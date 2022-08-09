@@ -14,6 +14,8 @@ User.create!(
   password_confirmation: 'foobar',
   confirmed_at: Time.zone.now
 )
+# user.skip_confirmation!
+# user.save!
 
 # Отключить активность, чтобы не было ошибок при создании курсов
 PublicActivity.enabled = false
