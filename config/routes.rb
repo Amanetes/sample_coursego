@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   resources :enrollments
   root 'home#index'
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :courses do
     resources :lessons
     resources :enrollments, only: %i[new create]
