@@ -5,7 +5,7 @@ class EnrollmentsController < ApplicationController
   before_action :set_course, only: %i[new create]
 
   def index
-    @enrollments = Enrollment.all
+    @pagy, @enrollments = pagy(Enrollment.all)
     authorize_enrollment!
   end
 
