@@ -8,8 +8,8 @@ Rails.application.configure do
   Rails.application.config.middleware.use ExceptionNotification::Rack,
                                           email: {
                                             email_prefix: '[PREFIX] ',
-                                            sender_address: %{"notifier" <notifier@example.com>},
-                                            exception_recipients: %w{ser_8904@mail.ru}
+                                            sender_address: %("notifier" <notifier@example.com>),
+                                            exception_recipients: %w[ser_8904@mail.ru]
                                           }
   # Code is not reloaded between requests.
   config.cache_classes = true
