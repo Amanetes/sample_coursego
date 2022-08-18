@@ -16,29 +16,21 @@
           = link_to courses_path, class: class_names('nav-link', { active: current_page?(courses_path) }) do
             .fa.fa-graduation-cap
             Courses
-        %li.nav-item
-          = link_to new_course_path, class: class_names('nav-link', { active: current_page?(new_course_path) }) do
-            .fa.fa-plus
-            New Course
-        %li.nav-item
-          = link_to users_path, class: class_names('nav-link', { active: current_page?(users_path) }) do
-            .fa.fa-users
-            Users
-        %li.nav-item
-          = link_to enrollments_path, class: class_names('nav-link', { active: current_page?(enrollments_path) }) do
-            .fa.fa-lock-open
-            Enrollments
-      = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
-        .input-group
-          = f.search_field :title_cont, class: 'form-control-sm', style: 'float: left; width: 150px; ', placeholder: 'Find a course', :autocomplete => :off
-          %span.input-group-append
-            %button.btn.btn-primary.btn-sm{:type => "submit"}
-              %span.fa.fa-search{"aria-hidden" => "true"}
+
+        .d-flex.flex-row.align-items-center.flex-wrap
+          = render 'layouts/shared/nav_search'
+
+      %ul.navbar-nav.mr-auto
+        - if current_user.has_role?(:student)
+          = render 'layouts/shared/dropdown/student'
+
+        - if current_user.has_role?(:teacher)
+          = render 'layouts/shared/dropdown/teacher'
+
+        - if current_user.has_role?(:admin)
+          = render 'layouts/shared/dropdown/admin'
+
       %ul.navbar-nav
-        %li.nav-item
-          = link_to home_activity_path, class: class_names('nav-link', { active: current_page?(home_activity_path) }) do
-            .fa.fa-bell
-            Activity
         %li.nav-item.dropdown
           %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
             %b= current_user.email

@@ -4,6 +4,10 @@ class Enrollment < ApplicationRecord
   belongs_to :course
   belongs_to :user
 
+  # если есть рейтинг, то должно быть и review и наоборот
+  validates :rating, presence: { if: :review? }
+  validates :review, presence: { if: :rating? }
+
   validates :user_id, uniqueness: { scope: :course_id }  # user cant be subscribed to the same course twice
   validates :course_id, uniqueness: { scope: :user_id }  # user cant be subscribed to the same course twice
 

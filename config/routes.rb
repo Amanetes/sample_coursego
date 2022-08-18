@@ -9,5 +9,5 @@ Rails.application.routes.draw do
     resources :enrollments, only: %i[new create]
   end
   resources :users, only: %i[index edit show update]
-  get 'home/activity'
+  get 'activity', to: 'home#activity'
 end
