@@ -4,6 +4,12 @@
     Teach
   .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "teacherDropdown"}
     = link_to new_course_path, class: "dropdown-item" do
-      .fa.fa-plus
       .fa.fa-graduation-cap
+      .fa.fa-plus
       New Course
+    = link_to created_courses_path, class: "dropdown-item" do
+      .fa.fa-graduation-cap
+      My Courses
+    = link_to my_students_enrollments_path, class: "dropdown-item" do
+      .fa.fa-users
+      My Students

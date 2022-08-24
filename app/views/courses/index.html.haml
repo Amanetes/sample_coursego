@@ -13,7 +13,7 @@
 
 .row
   .col-md-2
-    = search_form_for @ransack_courses do |f|
+    = search_form_for @ransack_courses, as: :courses_search, url: @ransack_path do |f|
       = f.label :title
       = f.search_field :title_cont, placeholder: 'Title', class: 'form-control form-control-sm'
       = f.label :description
