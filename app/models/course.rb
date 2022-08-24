@@ -22,6 +22,14 @@ class Course < ApplicationRecord
     enrollments.where(user_id: [user.id], course_id: [id]).empty?
   end
 
+  def update_rating
+    if enrollments.any? && enrollments.where.not(rating: nil).any? # Course has many enrollments!
+      update_column :average_rating, enrollments.average(:rating).round(2).to_f
+    else
+      update_column :average_rating, 0
+    end
+  end
+
   LANGUAGES = %i[English Russian Polish Spanish].freeze
   def self.languages
     LANGUAGES.map { |language| [language, language] }
