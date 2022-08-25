@@ -43,24 +43,36 @@
     .row
     Learn on your schedule
 
+%p
+
+%h2
+  .fa.fa-user-graduate
+  Continue Learning
+.row
+  - @purchased_courses.each do |course|
+    .card-lg-6.col-md-4.col-12.mt-3
+      = render 'courses/course', course: course
 %hr
 %h2
+  .fa.fa-chart-line
   Popular courses
 .row
-  - @courses.each do |course|
+  - @popular_courses.each do |course|
     .card-lg-6.col-md-4.col-12.mt-3
       = render 'courses/course', course: course
 
 %hr
 %h2
+  .fa.fa-star
   Top rated courses
 .row
-  - @courses.each do |course|
+  - @top_rated_courses.each do |course|
     .card-lg-6.col-md-4.col-12.mt-3
       = render 'courses/course', course: course
 
 %hr
 %h2
+  .fa.fa-clock
   Latest courses
 .row
   - @latest_courses.each do |course|
@@ -68,3 +80,10 @@
       = render 'courses/course', course: course
 
 %hr
+%h2
+  .fa.fa-comment
+  What our students have to say
+.row
+  - @latest_good_reviews.each do |enrollment|
+    .card-lg-6.col-md-4.col-12.mt-3
+      = render 'enrollments/enrollment', enrollment: enrollment
