@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   end
   resources :users, only: %i[index edit show update]
   get 'activity', to: 'home#activity'
+  get 'analytics', to: 'home#analytics'
 end
