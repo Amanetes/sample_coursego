@@ -8,7 +8,8 @@ class Course < ApplicationRecord
   validates :title, :short_description, :language, :level, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :description, presence: true, length: { minimum: 5 }
-  belongs_to :user
+  belongs_to :user, counter_cache: true
+  # User.find_each { |user| User.reset_counters(user.id, :courses) }  Update counter_cache
   has_many :lessons, dependent: :destroy, inverse_of: :course
   has_many :enrollments, dependent: :destroy, inverse_of: :course
   def to_s

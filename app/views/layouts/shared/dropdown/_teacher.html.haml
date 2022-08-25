@@ -11,7 +11,7 @@
       .fa.fa-graduation-cap
       My Courses
       .badge.bg-danger
-        = current_user.courses.count
+        = current_user.courses_count
     = link_to my_students_enrollments_path, class: "dropdown-item" do
       .fa.fa-users
       My Students

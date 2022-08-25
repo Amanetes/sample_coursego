@@ -7,7 +7,7 @@
       .fa.fa-graduation-cap
       Purchased Courses
       .badge.bg-danger
-        = current_user.enrollments.count
+        = current_user.enrollments_count
     = link_to pending_review_courses_path, class: "dropdown-item" do
       .fa.fa-star
       Pending Review

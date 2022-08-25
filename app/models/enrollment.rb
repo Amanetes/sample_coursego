@@ -2,8 +2,9 @@
 
 class Enrollment < ApplicationRecord
   belongs_to :course, counter_cache: true # в момент изменения enrollment, связанное поле enrollments_count будет обновлено
-  belongs_to :user
-  # Course.find_each { |course| Course.reset_counters(course.id, :enrollments) } Update counter_cache
+  # Course.find_each { |course| Course.reset_counters(course.id, :enrollments) } Update counter_cache for enrollments count
+  belongs_to :user, counter_cache: true
+  # User.find_each { |user| User.reset_counters(user.id, :enrollments) }  Update counter_cache
   # если есть рейтинг, то должно быть и review и наоборот
   validates :rating, presence: { if: :review? }
   validates :review, presence: { if: :rating? }
