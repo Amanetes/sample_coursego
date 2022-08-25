@@ -11,7 +11,7 @@ class Course < ApplicationRecord
   belongs_to :user, counter_cache: true
   # User.find_each { |user| User.reset_counters(user.id, :courses) }  Update counter_cache
   has_many :lessons, dependent: :destroy, inverse_of: :course
-  has_many :enrollments, dependent: :destroy, inverse_of: :course
+  has_many :enrollments, dependent: :restrict_with_error, inverse_of: :course # Запрет на удаление курса, если есть подписки. Флеш сообщение настраивается в контроллере
   has_many :user_lessons, through: :lessons # Для того чтобы учесть уроки для курса
 
   validates :title, uniqueness: true

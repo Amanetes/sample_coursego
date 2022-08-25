@@ -3,9 +3,9 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :confirmable
-  has_many :courses, dependent: :destroy, inverse_of: :user
-  has_many :enrollments, dependent: :destroy, inverse_of: :user
-  has_many :user_lessons, dependent: :destroy
+  has_many :courses, dependent: :nullify, inverse_of: :user # nullify - при удалении пользователя, остануться его действия
+  has_many :enrollments, dependent: :nullify, inverse_of: :user
+  has_many :user_lessons, dependent: :nullify
   validate :must_have_a_role, on: :update
 
   rolify
