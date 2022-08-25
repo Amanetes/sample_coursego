@@ -6,7 +6,9 @@
 
 %h3
   .text-center
-    Courses
+    .fa.fa-graduation-cap
+    = controller_name.humanize + ":"
+    = action_name.humanize
     .badge.bg-info
       = @courses.count
 %p

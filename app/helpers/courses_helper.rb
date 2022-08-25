@@ -25,9 +25,17 @@ module CoursesHelper
     user_course = course.enrollments.where(user: current_user)
     if current_user && user_course.any?
       if user_course.pending_review.any?
-        link_to 'Add a review', edit_enrollment_path(user_course.first)
+        link_to edit_enrollment_path(user_course.first) do
+          "<i class='text-warning fa fa-star'></i>".html_safe + ' ' +
+            "<i class='text-dark fa fa-question'></i>".html_safe + ' ' \
+            'Add a review'
+        end
       else
-        link_to 'Thanks for reviewing! Your Review', enrollment_path(user_course.first)
+        link_to enrollment_path(user_course.first) do
+          "<i class='text-warning fa fa-star'></i>".html_safe + ' ' +
+            "<i class='text-success fa fa-check'></i>".html_safe + ' ' \
+            'Thanks for reviewing!'
+        end
       end
     end
   end

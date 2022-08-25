@@ -12,6 +12,8 @@ class Course < ApplicationRecord
   # User.find_each { |user| User.reset_counters(user.id, :courses) }  Update counter_cache
   has_many :lessons, dependent: :destroy, inverse_of: :course
   has_many :enrollments, dependent: :destroy, inverse_of: :course
+
+  validates :title, uniqueness: true
   def to_s
     title
   end

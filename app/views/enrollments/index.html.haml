@@ -1,14 +1,18 @@
 - content_for :title do
   Corsego
-  \|
-  All Enrollments
+  |
+  = controller_name.humanize
+  = action_name.humanize
 
 %h3
   .text-center
-    Enrollments
+    .fa.fa-lock-open
+    = controller_name.humanize + ":"
+    = action_name.humanize
     .badge.bg-info
       = @enrollments.count
 %p
+
 .card.shadow-sm.mb-3
   .card-body.bg-light
     -# Необходимо добавить кастомный url: @ransack_path для того чтобы перенаправлять на нужный путь,
@@ -48,7 +52,7 @@
       - @enrollments.each do |enrollment|
         %tr
           %td= enrollment.id
-          %td= link_to enrollment.user, user_path(enrollment.user)
+          %td= link_to enrollment.user.email, user_path(enrollment.user)
           %td= enrollment.created_at.strftime("%d/%b/%Y, %H:%M")
           %td= link_to enrollment.course, course_path(enrollment.course)
           %td= number_to_currency(enrollment.price)
