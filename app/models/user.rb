@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable, :confirmable
   has_many :courses, dependent: :destroy, inverse_of: :user
   has_many :enrollments, dependent: :destroy, inverse_of: :user
+  has_many :user_lessons, dependent: :destroy
   validate :must_have_a_role, on: :update
 
   rolify
@@ -23,6 +24,10 @@ class User < ApplicationRecord
 
   def buy_course(course)
     enrollments.create(course: course, price: course.price)
+  end
+
+  def view_lesson(lesson)
+    user_lessons.create(lesson: lesson) unless user_lessons.where(lesson: lesson).any?
   end
 
   extend FriendlyId
