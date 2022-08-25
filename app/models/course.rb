@@ -14,6 +14,10 @@ class Course < ApplicationRecord
   has_many :enrollments, dependent: :destroy, inverse_of: :course
 
   validates :title, uniqueness: true
+
+  scope :latest, -> { limit(3).order(created_at: :desc) }
+  scope :top_rated, -> { limit(3).order(average_rating: :desc, created_at: :desc) }
+  scope :popular, -> { limit(3).order(enrollments_count: :desc, created_at: :desc) }
   def to_s
     title
   end
