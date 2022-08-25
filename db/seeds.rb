@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
-# admin = User.create!(
-#   email: 'admin@example.com',
-#   password: 'foobar',
-#   password_confirmation: 'foobar',
-#   confirmed_at: Time.zone.now,
-# )
-# admin.add_role(:admin) unless admin.has_role?(:admin)
+admin = User.create!(
+  email: 'admin@example.com',
+  password: 'foobar',
+  password_confirmation: 'foobar',
+  confirmed_at: Time.zone.now,
+)
+admin.add_role(:admin) unless admin.has_role?(:admin)
 
-User.create!(
+user = User.create!(
   email: 'foo@bar.com',
   password: 'foobar',
   password_confirmation: 'foobar',
   confirmed_at: Time.zone.now
 )
-# user.skip_confirmation!
-# user.save!
+user.skip_confirmation!
+user.save!
 
 # Отключить активность, чтобы не было ошибок при создании курсов
 PublicActivity.enabled = false

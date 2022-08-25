@@ -19,7 +19,7 @@ class Course < ApplicationRecord
   friendly_id :title, use: :slugged
 
   def bought?(user)
-    enrollments.where(user_id: [user.id], course_id: [id]).empty?
+    enrollments.where(user_id: [user.id], course_id: [id]).any?
   end
 
   def update_rating

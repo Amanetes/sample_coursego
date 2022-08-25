@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Enrollment < ApplicationRecord
-  belongs_to :course
+  belongs_to :course, counter_cache: true # в момент изменения enrollment, связанное поле enrollments_count будет обновлено
   belongs_to :user
-
+  # Course.find_each { |course| Course.reset_counters(course.id, :enrollments) } Update counter_cache
   # если есть рейтинг, то должно быть и review и наоборот
   validates :rating, presence: { if: :review? }
   validates :review, presence: { if: :rating? }
@@ -11,7 +11,7 @@ class Enrollment < ApplicationRecord
   validates :user_id, uniqueness: { scope: :course_id }  # user cant be subscribed to the same course twice
   validates :course_id, uniqueness: { scope: :user_id }  # user cant be subscribed to the same course twice
 
-  validate :cant_subscribe_to_own_course  # user can't create a subscription if course.user == current_user.id
+  validate :cant_subscribe_to_own_course # user can't create a subscription if course.user == current_user.id
 
   scope :pending_review, -> { where(rating: [0, nil, ''], review: [0, nil, '']) }
 

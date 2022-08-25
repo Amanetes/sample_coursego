@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EnrollmentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -10,11 +12,11 @@ class EnrollmentPolicy < ApplicationPolicy
   end
 
   def edit?
-    @record.user_id == @user.id
+    @record.user == @user
   end
 
   def update?
-    @record.user_id == @user.id
+    @record.user == @user
   end
 
   def destroy?

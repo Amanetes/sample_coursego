@@ -22,7 +22,6 @@ class EnrollmentsController < ApplicationController
   end
 
   def new
-    authorize_enrollment!
     @enrollment = Enrollment.new
   end
 
