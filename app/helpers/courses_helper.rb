@@ -8,8 +8,11 @@ module CoursesHelper
         link_to 'You created this course. View analytics', course_path(course)
         # Если курс был куплен
       elsif course.enrollments.where(user: current_user).any?
-        link_to 'You bought this course. Keep learning', course_path(course)
-        # Купить курс
+        link_to course_path(course) do
+          # "You bought this course. Keep learning" +
+          "<i class='fa fa-spinner'></i>".html_safe + " " +
+            number_to_percentage(course.progress(current_user), precision: 0)
+        end
       elsif course.price.positive?
         link_to number_to_currency(course.price), new_course_enrollment_path(course), class: 'btn btn-success'
       else

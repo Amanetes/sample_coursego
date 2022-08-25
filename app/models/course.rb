@@ -12,6 +12,7 @@ class Course < ApplicationRecord
   # User.find_each { |user| User.reset_counters(user.id, :courses) }  Update counter_cache
   has_many :lessons, dependent: :destroy, inverse_of: :course
   has_many :enrollments, dependent: :destroy, inverse_of: :course
+  has_many :user_lessons, through: :lessons # Для того чтобы учесть уроки для курса
 
   validates :title, uniqueness: true
 
@@ -27,6 +28,13 @@ class Course < ApplicationRecord
 
   def bought?(user)
     enrollments.where(user_id: [user.id], course_id: [id]).any?
+  end
+
+  # Количество уроков созданных конкретным пользователем / на количество уроков в курсе
+  # В процентном соотношении
+  # Прогресс показывается только в случае наличия уроков
+  def progress(user)
+    user_lessons.where(user: user).count / lessons_count.to_f * 100 unless lessons_count.zero?
   end
 
   def update_rating
