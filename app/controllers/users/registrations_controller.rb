@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  prepend_before_action :check_captcha, only: [:create] # Change this to be any actions you want to protect.
+  # rubocop:disable Rails/LexicallyScopedActionFilter
+  prepend_before_action :check_captcha, only: %i[create] # Change this to be any actions you want to protect.
+  # rubocop:enable Rails/LexicallyScopedActionFilter
 
   private
 

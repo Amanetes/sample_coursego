@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CoursePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -5,16 +7,28 @@ class CoursePolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    true
+  end
+
   def edit?
-    @user.has_role?(:admin) || @record.user == @user
+    @record.user == @user
   end
 
   def update?
-    @user.has_role?(:admin) || @record.user == @user
+    @record.user == @user
   end
 
   def new?
     @user.has_role?(:teacher)
+  end
+
+  def approve?
+    @user.has_role?(:admin)
+  end
+
+  def unapproved?
+    @user.has_role?(:admin)
   end
 
   def create?

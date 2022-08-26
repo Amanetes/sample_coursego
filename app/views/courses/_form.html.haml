@@ -10,6 +10,7 @@
     = f.input :language, collection: Course.languages, include_blank: true, input_html: { class: 'form-select' }
     = f.input :level, collection: Course.levels, include_blank: true, input_html: { class: 'form-select' }
     = f.input :price
+    = f.input :published
 
   .form-actions
     = f.button :submit, class: 'mt-3'
