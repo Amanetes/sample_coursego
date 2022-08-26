@@ -7,8 +7,16 @@ class CoursePolicy < ApplicationPolicy
     end
   end
 
+  # Если курс опубликован и утвержден - любой может просматривать
+  # Если админ - может просматривать люобой курс, даже неопубликованный
+  # Если создатель курса - может просматривать
+  # Если курс куплен - может просматривать
   def show?
-    true
+    # Если курс опубликован и утвержден - любой может просматривать
+    (@record.published && @record.approved) ||
+      (@user.present? && @user.has_role?(:admin)) ||
+      (@user.present? && @record.user_id == @user.id) ||
+      @record.bought?(@user)
   end
 
   def edit?
