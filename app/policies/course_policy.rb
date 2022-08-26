@@ -12,10 +12,9 @@ class CoursePolicy < ApplicationPolicy
   # Если создатель курса - может просматривать
   # Если курс куплен - может просматривать
   def show?
-    # Если курс опубликован и утвержден - любой может просматривать
-    (@record.published && @record.approved) ||
-      (@user.present? && @user.has_role?(:admin)) ||
-      (@user.present? && @record.user_id == @user.id) ||
+    ready? ||
+      @user&.has_role?(:admin) ||
+      (@user.present? && @record.user == @user) ||
       (@user.present? && @record.bought?(@user))
   end
 
@@ -44,10 +43,17 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user.has_role?(:admin) || @record.user == @user
+    @record.user == @user
+    # @user.has_role?(:admin) || @record.user == @user
   end
 
   def owner?
     @record.user == @user
+  end
+
+  private
+
+  def ready?
+    @record.published && @record.approved
   end
 end

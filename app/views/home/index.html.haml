@@ -52,6 +52,8 @@
     - @purchased_courses.each do |course|
       .card-lg-6.col-md-4.col-12.mt-3
         = render 'courses/course', course: course
+      .text-end
+        = link_to 'All my purchased courses', purchased_courses_path
   %hr
 %h2
   .fa.fa-chart-line
@@ -60,6 +62,9 @@
   - @popular.each do |course|
     .card-lg-6.col-md-4.col-12.mt-3
       = render 'courses/course', course: course
+    .text-end
+      = link_to 'More popular courses', courses_path(courses_search: {s: 'enrollments_count desc'})
+-# courses_search - for ransack, s for sort by
 
 %hr
 %h2
@@ -69,6 +74,8 @@
   - @top_rated.each do |course|
     .card-lg-6.col-md-4.col-12.mt-3
       = render 'courses/course', course: course
+    .text-end
+      = link_to 'Best rated courses', courses_path(courses_search: {s: 'average_rating desc'})
 
 %hr
 %h2
@@ -78,6 +85,8 @@
   - @latest.each do |course|
     .card-lg-6.col-md-4.col-12.mt-3
       = render 'courses/course', course: course
+    .text-end
+      = link_to 'More new courses', courses_path(courses_search: {s: 'created_at desc'})
 
 %hr
 %h2

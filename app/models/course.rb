@@ -54,7 +54,7 @@ class Course < ApplicationRecord
     LANGUAGES.map { |language| [language, language] }
   end
 
-  LEVELS = %i[Beginner Intermediate Advanced].freeze
+  LEVELS = %i[All_levels Beginner Intermediate Advanced].freeze
   def self.levels
     LEVELS.map { |level| [level, level] }
   end

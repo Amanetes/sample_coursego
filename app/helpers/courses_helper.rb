@@ -5,7 +5,10 @@ module CoursesHelper
     if current_user
       # Если текущий пользователь создал курс
       if course.user == current_user
-        link_to 'You created this course. View analytics', course_path(course)
+        link_to course_path(course) do
+          "You created this course " +
+            number_to_currency(course.price)
+        end
         # Если курс был куплен
       elsif course.enrollments.where(user: current_user).any?
         link_to course_path(course) do
