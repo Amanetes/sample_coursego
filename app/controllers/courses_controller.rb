@@ -2,8 +2,8 @@
 
 class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
-  before_action :set_course, only: %i[show edit update destroy approve unapprove]
-  after_action :verify_authorized, except: %i[purchased created pending_review index]
+  before_action :set_course, only: %i[show edit update destroy approve unapprove analytics]
+  after_action :verify_authorized, except: %i[purchased created pending_review index analytics]
   def index
     # if params[:title]
     #   @courses = Course.where('title ILIKE ?', "%#{params[:title]}%") # case-insensitive
@@ -18,6 +18,11 @@ class CoursesController < ApplicationController
 
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
   end
+
+  def analytics
+    authorize @course, :owner?
+  end
+
 
   def purchased
     @ransack_path = purchased_courses_path
