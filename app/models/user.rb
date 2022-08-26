@@ -27,7 +27,12 @@ class User < ApplicationRecord
   end
 
   def view_lesson(lesson)
-    user_lessons.create(lesson: lesson) unless user_lessons.where(lesson: lesson).any?
+    user_lesson = user_lessons.where(lesson: lesson) # Ищем уроки пользователя
+    if user_lesson.any?
+      user_lesson.first.increment!(:impressions) # Увеличиваем число просмотров урока
+    else
+      user_lessons.create(lesson: lesson) # Если урока не существует, то создаем запись в таблице user_lessons
+    end
   end
 
   extend FriendlyId
