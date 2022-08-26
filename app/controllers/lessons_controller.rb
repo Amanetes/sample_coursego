@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class LessonsController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[index]
   before_action :set_lesson, only: %i[show edit update destroy]
   before_action :set_course, except: %i[index]
   def index

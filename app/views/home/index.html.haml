@@ -44,15 +44,15 @@
     Learn on your schedule
 
 %p
-
-%h2
-  .fa.fa-user-graduate
-  Continue Learning
-.row
-  - @purchased_courses.each do |course|
-    .card-lg-6.col-md-4.col-12.mt-3
-      = render 'courses/course', course: course
-%hr
+- if current_user
+  %h2
+    .fa.fa-user-graduate
+    Continue Learning
+  .row
+    - @purchased_courses.each do |course|
+      .card-lg-6.col-md-4.col-12.mt-3
+        = render 'courses/course', course: course
+  %hr
 %h2
   .fa.fa-chart-line
   Popular courses

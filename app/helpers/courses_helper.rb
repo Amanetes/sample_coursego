@@ -10,7 +10,7 @@ module CoursesHelper
       elsif course.enrollments.where(user: current_user).any?
         link_to course_path(course) do
           # "You bought this course. Keep learning" +
-          "<i class='fa fa-spinner'></i>".html_safe + " " +
+          "<i class='fa fa-spinner'></i>".html_safe + ' ' +
             number_to_percentage(course.progress(current_user), precision: 0)
         end
       elsif course.price.positive?
@@ -20,7 +20,7 @@ module CoursesHelper
       end
       # logic to buy
     else
-      link_to 'Check price', course_path(course), class: 'btn btn-md btn-success'
+      link_to 'Check price', new_course_enrollment_path(course), class: 'btn btn-success'
     end
   end
 

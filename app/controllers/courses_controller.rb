@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CoursesController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[show]
   before_action :set_course, only: %i[show edit update destroy approve unapprove]
   after_action :verify_authorized, except: %i[purchased created pending_review index]
   def index
