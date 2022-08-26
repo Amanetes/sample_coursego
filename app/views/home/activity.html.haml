@@ -12,7 +12,7 @@
       .badge.rounded-pill.bg-info
         = activity.created_at.strftime('%d-%m-%Y %H:%m')
       (#{time_ago_in_words(activity.created_at)})
-      = activity.trackable_type
+      = model_label(activity.trackable_type)
       -# = activity.trackable_id
       - if activity.trackable_type == 'Lesson'
         - if Lesson.where(id: activity.trackable_id).present?
@@ -21,7 +21,8 @@
           Lesson was deleted
       - else
         = link_to activity.trackable, activity.trackable
-      = activity.key
+      = crud_label(activity.key.match(/\.(.*)/)[1])
+      /= activity.key.match(/\.(.*)/)[1] - course. опускается, а в метод приходит только экшен
       -# = activity.parameters
       -# = activity.owner
 
