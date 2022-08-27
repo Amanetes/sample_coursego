@@ -26,6 +26,12 @@ class Lesson < ApplicationRecord
             content_type: %w[image/png image/jpg image/jpeg],
             size: { less_than: 500.kilobytes, message: 'size should be under 500 kilobytes' }
 
+  # Валидирует video_thumbnail если присутствует видео
+  # validates :video_thumbnail, presence: true, if: :video_present?
+  # def video_present?
+  #  video.present?
+  # end
+
   include RankedModel
   ranks :row_order, with_same: :course_id
 
