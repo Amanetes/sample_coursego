@@ -3,7 +3,7 @@
 class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
   before_action :set_course, only: %i[show edit update destroy approve unapprove analytics]
-  after_action :verify_authorized, except: %i[purchased created pending_review index analytics]
+  after_action :verify_authorized, except: %i[purchased update created pending_review index analytics]
   def index
     # if params[:title]
     #   @courses = Course.where('title ILIKE ?', "%#{params[:title]}%") # case-insensitive
@@ -130,6 +130,7 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:title, :description, :short_description, :price, :published, :language, :level)
+    params.require(:course).permit(:title, :description, :short_description, :price,
+                                   :published, :language, :level, :avatar)
   end
 end

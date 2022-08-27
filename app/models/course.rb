@@ -23,6 +23,8 @@ class Course < ApplicationRecord
   scope :unpublished, -> { where(published: false) }
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where(approved: false) }
+
+  has_one_attached :avatar
   def to_s
     title
   end
@@ -54,7 +56,8 @@ class Course < ApplicationRecord
     LANGUAGES.map { |language| [language, language] }
   end
 
-  LEVELS = %i[All_levels Beginner Intermediate Advanced].freeze
+  LEVELS = [:'All levels', :Beginner, :Intermediate, :Advanced].freeze
+
   def self.levels
     LEVELS.map { |level| [level, level] }
   end

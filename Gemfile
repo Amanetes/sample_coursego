@@ -51,3 +51,4 @@ gem 'recaptcha'
 gem 'chartkick'
 gem 'groupdate'
 gem 'ranked-model'
+gem 'aws-sdk-s3', require: false
