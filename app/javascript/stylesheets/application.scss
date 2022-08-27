@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 
+
 .parallax {
   /* Set a specific height */
   height: auto;
@@ -9,4 +10,15 @@
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
+}
+
+//highlight for drag and drop functionality
+.ui-state-highlight { height: 3em; line-height: 1.2em; background-color: yellow; }
+
+//header navbar dropdown on top of all other content
+.dropdown {z-index: 9999;}
+
+//simple_form input for rich_text_area
+trix-editor.form-control {
+  height: auto;
 }
