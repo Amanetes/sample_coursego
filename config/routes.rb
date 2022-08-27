@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[index edit show update]
   get 'activity', to: 'home#activity'
   get 'analytics', to: 'home#analytics'
+  resources :youtube, only: :show
 
   namespace :charts do
     get 'users_per_day'

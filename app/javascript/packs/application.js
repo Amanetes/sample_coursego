@@ -13,6 +13,7 @@ import "chartkick/chart.js"
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 import "../trix-editor-overrides"
+import "../youtube"
 
 Rails.start()
 Turbolinks.start()
