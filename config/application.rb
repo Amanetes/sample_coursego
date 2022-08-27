@@ -23,7 +23,7 @@ module SampleCoursego
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    # video previews for action_text
+    # video and audio previews for action_text
     config.after_initialize do
       ActionText::ContentHelper.allowed_attributes.add 'style'
       ActionText::ContentHelper.allowed_attributes.add 'controls'
