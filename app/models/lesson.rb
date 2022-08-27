@@ -6,7 +6,8 @@ class Lesson < ApplicationRecord
   # Course.find_each { |course| Course.reset_counters(course.id, :lessons) } Update counter_cache
 
   validates :title, :content, presence: true # :course_id не нужно указывать явно
-  validates :title, uniqueness: true, length: { maximum: 70 }
+  validates :title, length: { maximum: 70 }
+  validates :title, uniqueness: { scope: :course_id } # scope - в разных курсах могут быть уроки с одинаковым названием, но в одном не могут
 
   extend FriendlyId
   friendly_id :title, use: :slugged
@@ -15,6 +16,15 @@ class Lesson < ApplicationRecord
   tracked owner: proc { |controller, _model| controller.current_user }
 
   has_rich_text :content
+  has_one_attached :video
+  has_one_attached :video_thumbnail
+
+  validates :video,
+            content_type: ['video/mp4'],
+            size: { less_than: 50.megabytes, message: 'size should be under 50 megabytes' }
+  validates :video_thumbnail,
+            content_type: %w[image/png image/jpg image/jpeg],
+            size: { less_than: 500.kilobytes, message: 'size should be under 500 kilobytes' }
 
   include RankedModel
   ranks :row_order, with_same: :course_id
@@ -24,11 +34,11 @@ class Lesson < ApplicationRecord
   end
 
   def prev
-    course.lessons.where("row_order < ?", row_order).order(:row_order).last
+    course.lessons.where('row_order < ?', row_order).order(:row_order).last
   end
 
   def next
-    course.lessons.where("row_order > ?", row_order).order(:row_order).first
+    course.lessons.where('row_order > ?', row_order).order(:row_order).first
   end
 
   def viewed?(user)

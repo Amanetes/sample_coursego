@@ -3,8 +3,11 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :title
+    = f.input :title, input_html: { autocomplete: 'off' }
     = f.input :content, as: :rich_text_area
+    %p
+    = f.input :video, as: :file, input_html: { class: 'form-control-file form-control' }
+    = f.input :video_thumbnail, as: :file, input_html: { class: 'form-control-file form-control' }
     -# Для того чтобы урок создавался для конкретного курса. Значение либо получаем из параметров или id курса
     -# Ассоциация вызывает ошибку
     -# = f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden

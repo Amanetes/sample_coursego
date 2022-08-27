@@ -78,7 +78,8 @@ class LessonsController < ApplicationController
 
   # Убрать course_id из permitted params по соображениям безопасности.
   # Id все равно присваивается в экшене create через ассоциации
+  # Row_order_position для сортировки
   def lesson_params
-    params.require(:lesson).permit(:title, :content)
+    params.require(:lesson).permit(:title, :content, :row_order_position, :video, :video_thumbnail)
   end
 end
