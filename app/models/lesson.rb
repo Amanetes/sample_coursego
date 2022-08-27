@@ -15,9 +15,6 @@ class Lesson < ApplicationRecord
 
   has_rich_text :content
 
-  include RankedModel
-  ranks :row_order, with_same: :course_id
-
   def to_s
     title
   end

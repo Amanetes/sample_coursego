@@ -9,9 +9,7 @@ class LessonPolicy < ApplicationPolicy
 
   # Просматривать контент курса может админ, создатель курсы или купивший курс
   def show?
-    @user.has_role?(:admin) ||
-      @record.course.user == @user ||
-      @record.course.bought?(@user) == true
+    @user.has_role?(:admin) || @record.course.user_id == @user.id || !@record.course.bought?(@user)
   end
 
   def edit?
