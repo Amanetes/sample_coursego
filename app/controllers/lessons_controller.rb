@@ -2,8 +2,27 @@
 
 class LessonsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index]
-  before_action :set_lesson, only: %i[show edit update destroy]
+  before_action :set_lesson, only: %i[show edit update destroy delete_video]
   before_action :set_course, except: %i[index]
+
+  # Удалить видео и превью в форме
+  def delete_video
+    authorize @lesson, :edit?
+    @lesson.video.purge
+    @lesson.video_thumbnail.purge
+    redirect_to edit_course_lesson_path(@course, @lesson), notice: 'Video successfully deleted!'
+  end
+
+  # Not implemented. Для работы вместе с jquery
+  # Для drag-n-drop уроков в списке
+  # def sort
+  #   @course = Course.friendly.find(params[:course_id])
+  #   lesson = Lesson.friendly.find(params[:lesson_id])
+  #   authorize lesson, :edit?
+  #   lesson.update(lesson_params)
+  #   render body: nil
+  # end
+
   def index
     @lessons = Lesson.all
   end

@@ -9,6 +9,7 @@
     = f.input :video, as: :file, input_html: { class: 'form-control-file form-control' }
     - if @lesson.video.attached?
       = f.hint @lesson.video.filename.to_s
+      = link_to 'Remove video and thumbnail', delete_video_course_lesson_path(@course, @lesson), method: :delete, data: { confirm: 'Are you sure?' }
     = f.input :video, as: :file, input_html: { class: 'form-control-file form-control' }
     - if @lesson.video_thumbnail.attached?
       = f.hint @lesson.video_thumbnail.filename.to_s
