@@ -11,7 +11,7 @@ class LessonsController < ApplicationController
   def show
     authorize_lesson!
     current_user.view_lesson(@lesson)
-    @lessons = @course.lessons
+    @lessons = @course.lessons.rank(:row_order)
   end
 
   def new

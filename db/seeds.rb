@@ -8,14 +8,14 @@ if User.find_by(email: 'admin@example.com').nil?
 end
 
 if User.find_by(email: 'teacher@example.com').nil?
-  teacher = User.create!(email: 'foobar', password: 'foobar', password_confirmation: 'foobar', confirmed_at: Time.zone.now)
+  teacher = User.create!(email: 'teacher@example.com', password: 'foobar', password_confirmation: 'foobar', confirmed_at: Time.zone.now)
   # teacher.skip_confirmation!
   teacher.add_role(:teacher) unless teacher.has_role?(:teacher)
-  steacher.add_role(:student) unless teacher.has_role?(:student)
+  teacher.add_role(:student) unless teacher.has_role?(:student)
 end
 
 if User.find_by(email: 'student@example.com').nil?
-  student = User.create!(email: 'foobar', password: 'foobar', password_confirmation: 'student@example.com', confirmed_at: Time.zone.now)
+  student = User.create!(email: 'student@example.com', password: 'foobar', password_confirmation: 'foobar', confirmed_at: Time.zone.now)
   # student.skip_confirmation!
   student.add_role(:student) unless student.has_role?(:student)
 end
@@ -26,7 +26,7 @@ PublicActivity.enabled = false
 5.times do
   Course.create!([{
                    title: Faker::Educator.course_name,
-                   marketing_description: Faker::Quote.famous_last_words,
+                   short_description: Faker::Quote.famous_last_words,
                    description: Faker::TvShows::GameOfThrones.quote,
                    user: User.find_by(email: 'admin@example.com'),
                    language: 'English',
@@ -41,9 +41,9 @@ end
 5.times do
   Course.create!([{
                    title: Faker::Educator.course_name,
-                   marketing_description: Faker::Quote.famous_last_words,
+                   short_description: Faker::Quote.famous_last_words,
                    description: Faker::TvShows::GameOfThrones.quote,
-                   user: User.find_by(email: 'studentteacher@example.com'),
+                   user: User.find_by(email: 'teacher@example.com'),
                    language: Faker::ProgrammingLanguage.name,
                    level: 'Beginner',
                    # price: Faker::Number.between(from: 1000, to: 20000),
