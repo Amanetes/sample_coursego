@@ -6,6 +6,7 @@ class Lesson < ApplicationRecord
   # Course.find_each { |course| Course.reset_counters(course.id, :lessons) } Update counter_cache
 
   validates :title, :content, presence: true # :course_id не нужно указывать явно
+  validates :title, uniqueness: true, length: { maximum: 70 }
 
   extend FriendlyId
   friendly_id :title, use: :slugged
