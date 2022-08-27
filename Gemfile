@@ -50,5 +50,6 @@ gem 'pagy'
 gem 'recaptcha'
 gem 'chartkick'
 gem 'groupdate'
-gem 'ranked-model'
-gem 'aws-sdk-s3', require: false
+gem 'ranked-model' # give serial/index numbers to items in a list
+gem 'aws-sdk-s3', require: false # save images and files in production
+gem 'active_storage_validations' # validate image and file uploads
