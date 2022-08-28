@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_lesson, only: :create
-  before_action :set_course, only: :create
+  before_action :set_lesson, only: %i[create destroy]
+  before_action :set_course, only: %i[create destroy]
+  before_action :set_comment, only: %i[destroy]
 
   def create
     @comment = @lesson.comments.build(comment_params)
@@ -27,7 +28,19 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to course_lesson_path(@course, @lesson), notice: 'Comment was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
+
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
   def set_course
     @course = Course.friendly.find(params[:course_id])
