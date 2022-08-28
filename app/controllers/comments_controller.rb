@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   before_action :set_lesson, only: %i[create destroy]
   before_action :set_course, only: %i[create destroy]
   before_action :set_comment, only: %i[destroy]
+  after_action :verify_authorized, only: %i[destroy]
 
   def create
     @comment = @lesson.comments.build(comment_params)
@@ -29,6 +30,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    authorize_comment!
     @comment.destroy
     respond_to do |format|
       format.html { redirect_to course_lesson_path(@course, @lesson), notice: 'Comment was successfully destroyed.' }
@@ -37,7 +39,9 @@ class CommentsController < ApplicationController
   end
 
   private
-
+  def authorize_comment!
+    authorize(@comment || Comment)
+  end
   def set_comment
     @comment = Comment.find(params[:id])
   end
