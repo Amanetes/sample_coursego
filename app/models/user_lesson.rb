@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class UserLesson < ApplicationRecord
-  belongs_to :user, counter_cache: true
-  belongs_to :lesson, counter_cache: true
+  belongs_to :user, counter_cache: true # too see how many lessons a user has viewed
+  belongs_to :lesson, counter_cache: true # too see how many lessons a user has viewed
 
   validates :user, presence: true
   validates :lesson, presence: true
