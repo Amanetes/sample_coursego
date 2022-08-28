@@ -1,0 +1,6 @@
+.card.shadow-sm.rounded-3
+  .card-body
+    = comment.content
+  .card-footer
+    = comment.user
+    = time_ago_in_words(comment.created_at)

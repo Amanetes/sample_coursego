@@ -7,7 +7,6 @@
       .text-danger.fa.fa-check-square
       /NOT VIEWED
     /.far.fa-check-square
-    = link_to lesson.title, course_lesson_path(@course, lesson)
     = link_to course_lesson_path(@course, lesson) do
       %b
         #{lesson.row_order_rank + 1}.
