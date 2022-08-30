@@ -3,6 +3,7 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    = favicon_link_tag 'logo.png'
     %title
       = content_for?(:title) ? yield(:title) : "Corsego Sample"
     = csrf_meta_tags
@@ -19,5 +20,5 @@
       %p
       = yield
     %br
-    .bg-dark.text-white
+    .purple-background.text-light
       = render 'layouts/shared/footer'

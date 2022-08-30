@@ -1,24 +1,23 @@
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400');
 
-
-.parallax {
-  /* Set a specific height */
-  height: auto;
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: white;
+body {
+  background: #2a4054;
+  color: #212529;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-//highlight for drag and drop functionality
+.purple-background { background-color: #563d7c; }
+.table { background: white; }
+.element { color: green; }
+
+// highlight for drag and drop functionality
 .ui-state-highlight { height: 3em; line-height: 1.2em; background-color: yellow; }
 
-//header navbar dropdown on top of all other content
-.dropdown {z-index: 9999;}
+// header navbar dropdown on top of all other content
+.dropdown { z-index: 9999; }
 
-//simple_form input for rich_text_area
+// simple_form input for rich_text_area
 trix-editor.form-control {
   height: auto;
 }
