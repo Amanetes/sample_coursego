@@ -53,3 +53,8 @@
         %li.nav-item
           = link_to 'Log In', new_user_session_path,
           class: class_names('nav-link', { active: current_page?(new_user_session_path) })
+        %li.nav-item
+          = link_to user_google_oauth2_omniauth_authorize_path, method: :post,
+          class: class_names('nav-link', { active: current_page?(user_google_oauth2_omniauth_authorize_path) }) do
+            .fab.fa-google
+            Sign in with Google
