@@ -20,3 +20,11 @@ body {
 trix-editor.form-control {
   height: auto;
 }
+
+//custom bootstrap button color
+$custompurple:#6f42c1;
+.btn-custom-purple {
+  color: #fff;
+  background-color: $custompurple;
+  border-color: $custompurple;
+}

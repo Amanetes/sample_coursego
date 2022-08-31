@@ -274,6 +274,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :google_oauth2, Rails.application.credentials.dig(:google_oauth2, :client_id).to_s, Rails.application.credentials.dig(:google_oauth2, :client_secret).to_s
   config.omniauth :github, Rails.application.credentials.dig(:github, :client_id).to_s, Rails.application.credentials.dig(:github, :client_secret).to_s, scope: 'user,public_repo'
+  config.omniauth :facebook, Rails.application.credentials.dig(:facebook, :app_id).to_s, Rails.application.credentials.dig(:facebook, :app_secret).to_s, callback_url: 'http://localhost:3000/users/auth/facebook/callback', scope: 'email,public_profile'
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

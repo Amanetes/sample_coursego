@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :confirmable,
-         :omniauthable, omniauth_providers: [:google_oauth2, :github]
+         :omniauthable, omniauth_providers: %i[google_oauth2 github facebook]
   has_many :courses, dependent: :nullify, inverse_of: :user # nullify - при удалении пользователя, остануться его действия
   has_many :enrollments, dependent: :nullify, inverse_of: :user
   has_many :user_lessons, dependent: :nullify
