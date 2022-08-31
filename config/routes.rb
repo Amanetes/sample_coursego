@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[index edit show update]
   get 'activity', to: 'home#activity'
   get 'analytics', to: 'home#analytics'
+  get 'privacy_policy', to: 'home#privacy_policy'
   resources :youtube, only: :show
 
   namespace :charts do
